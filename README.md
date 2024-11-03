@@ -1,4 +1,4 @@
-puffins
+Phase-field Utility for Fluid-Fluid Interface-capturing Numerical Simulations (PUFFINS)
 =====
 
 Fork "puffins" to create a new MOOSE-based application.
