@@ -32,6 +32,9 @@ protected:
   /// property name
   const MaterialPropertyName _f_name;
 
+  /// derivative name
+  const MaterialPropertyName _dFdc_name;
+
   /// Free energy coefficient
   const Real & _beta;
 
@@ -40,4 +43,5 @@ protected:
 
   /// function value derivative
   ADMaterialProperty<Real> & _prop_dFdc;
+  ADMaterialProperty<Real> & _duplicate_dFdc;
 };

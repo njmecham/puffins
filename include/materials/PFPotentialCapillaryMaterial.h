@@ -1,9 +1,10 @@
 #pragma once
 
 #include "INSADStabilized3Eqn.h"
+#include "DerivativeMaterialPropertyNameInterface.h"
 
 /**
- * This class computes extra residuals from melt pool for the INS equations.
+ * This class computes extra residuals from interface for the INS equations.
  */
 class PFPotentialCapillaryMaterial : public INSADStabilized3Eqn
 {
@@ -16,10 +17,13 @@ protected:
   void computeQpProperties() override;
 
   /// Phase field variable
-  const ADVariableValue & _c;
+  const ADVariableGradient & _grad_c;
 
   /// Gradient of the phase field chemical potential
-  const ADVariableGradient & _grad_w;
+  const ADVariableValue & _w;
+
+  /// Free energy derivative
+  const ADMaterialProperty<Real> & _dFdc;
 
   /// Capillary momentum source
   ADMaterialProperty<RealVectorValue> & _capillary_momentum_source;
