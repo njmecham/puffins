@@ -32,11 +32,8 @@ PFPotentialCapillaryMaterial::computeQpProperties()
   _capillary_momentum_source[_qp] = 0;
 
   ADRealVectorValue surface_tension_term = ADRealVectorValue(0.0);
-  RankTwoTensor iden(RankTwoTensor::initIdentity);
-  ADRankTwoTensor proj;
-  ADRealVectorValue normal = ADRealVectorValue(0.0);
 
-  surface_tension_term = _grad_c[_qp] * (_dFdc[_qp] - _w[_qp]);
+  surface_tension_term = -_grad_c[_qp] * (_dFdc[_qp] - _w[_qp]);
 
   _capillary_momentum_source[_qp] += surface_tension_term;
 
