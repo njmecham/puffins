@@ -10,16 +10,17 @@ PFPotentialCapillaryMaterial::validParams()
                              "using energy potential.");
   params.addRequiredCoupledVar("c", "Phase field concentration");
   params.addRequiredCoupledVar("w", "Phase field chemical potential");
-  params.addRequiredParam<MaterialPropertyName>(
-      "dFdc_name", "The derivative of the free energy function with respect to the concentration.");
+  // params.addRequiredParam<MaterialPropertyName>(
+  //     "dFdc_name", "The derivative of the free energy function with respect to the
+  //     concentration.");
   return params;
 }
 
 PFPotentialCapillaryMaterial::PFPotentialCapillaryMaterial(const InputParameters & parameters)
   : INSADStabilized3Eqn(parameters),
-    _dFdc(getADMaterialProperty<Real>("dFdc_name")),
-    _w(adCoupledValue("w")),
+    // _dFdc(getADMaterialProperty<Real>("dFdc_name")),
     _grad_c(adCoupledGradient("c")),
+    _w(adCoupledValue("w")),
     _capillary_momentum_source(declareADProperty<RealVectorValue>("capillary_momentum_source"))
 {
 }
@@ -33,7 +34,7 @@ PFPotentialCapillaryMaterial::computeQpProperties()
 
   ADRealVectorValue surface_tension_term = ADRealVectorValue(0.0);
 
-  surface_tension_term = -_grad_c[_qp] * (_dFdc[_qp] - _w[_qp]);
+  surface_tension_term = _grad_c[_qp] * (_w[_qp]);
 
   _capillary_momentum_source[_qp] += surface_tension_term;
 

@@ -17,13 +17,13 @@ protected:
   void computeQpProperties() override;
 
   /// Phase field variable
-  const ADVariableGradient & _grad_c;
-
-  /// Gradient of the phase field chemical potential
   const ADVariableValue & _w;
 
-  /// Free energy derivative
-  const ADMaterialProperty<Real> & _dFdc;
+  /// Gradient of the phase field chemical potential
+  const ADVariableGradient & _grad_c;
+
+  // /// Free energy derivative
+  // const ADMaterialProperty<Real> & _dFdc;
 
   /// Capillary momentum source
   ADMaterialProperty<RealVectorValue> & _capillary_momentum_source;
